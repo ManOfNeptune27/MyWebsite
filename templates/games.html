@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}100% Games | My Portfolio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>My 100% Completions</h1>
+    <p>Games I've fully completed and mastered</p>
+</div>
+
+<div class="games-container">
+    <div class="completion-stats">
+        <div class="stat-card">
+            <div class="stat-number">{{ games|length }}</div>
+            <div class="stat-label">Games Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ (games|map(attribute='hours')|sum)|int }}</div>
+            <div class="stat-label">Total Hours Played</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ (games|map(attribute='hours')|sum / games|length)|round(1) }}</div>
+            <div class="stat-label">Avg Hours per Game</div>
+        </div>
+    </div>
+
+    <div class="games-list">
+        {% for game in games %}
+        <div class="game-card">
+            <div class="game-status">✓ 100%</div>
+            <div class="game-info">
+                <h3>{{ game.title }}</h3>
+                <div class="game-details">
+                    <span class="game-hours">⏱️ {{ game.hours }} hours</span>
+                    <span class="game-date">📅 {{ game.completionDate }}</span>
+                </div>
+            </div>
+            <div class="game-badge">MASTERED</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

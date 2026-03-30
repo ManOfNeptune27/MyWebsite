@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.name }} | My Portfolio{% endblock %}
+
+{% block content %}
+<div class="detail-header">
+    <a href="/favorites" class="back-link">← Back to Favorites</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-card">
+        <div class="detail-icon">
+            {% if item.category == 'games' %}🎮
+            {% elif item.category == 'movies' %}🎬
+            {% elif item.category == 'food' %}🍜
+            {% endif %}
+        </div>
+        
+        <h1>{{ item.name }}</h1>
+        
+        <div class="detail-rating">
+            <div class="stars-large">
+                {% for i in range(item.rating|int) %}⭐{% endfor %}
+                {% if item.rating % 1 != 0 %}✨{% endif %}
+            </div>
+            <p class="rating-text">{{ item.rating }} out of 10</p>
+        </div>
+        
+        <div class="detail-content">
+            <h2>Why I Love It</h2>
+            <p>{{ item.details }}</p>
+        </div>
+        
+        <div class="detail-footer">
+            <p class="category-badge">{{ item.category|capitalize }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
