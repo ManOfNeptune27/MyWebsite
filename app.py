@@ -19,21 +19,19 @@ favorites_data = {
     ]
 }
 
-# Games with 100% completion
-games_100_percent = [
-    {"title": "Hollow Knight", "completionDate": "2023-06-15", "hours": 45},
-    {"title": "Celeste", "completionDate": "2023-04-22", "hours": 28},
-    {"title": "Hades", "completionDate": "2023-08-10", "hours": 52},
-    {"title": "Stardew Valley", "completionDate": "2024-02-14", "hours": 180},
+# Games with platform and completion info
+all_games = [
+    {"title": "Hollow Knight", "completionDate": "2023-06-15", "hours": 45, "platform": "Steam", "completion": 100},
+    {"title": "Celeste", "completionDate": "2023-04-22", "hours": 28, "platform": "PlayStation", "completion": 100},
+    {"title": "Hades", "completionDate": "2023-08-10", "hours": 52, "platform": "PlayStation", "completion": 100},
+    {"title": "Stardew Valley", "completionDate": "2024-02-14", "hours": 180, "platform": "Steam", "completion": 100},
+    {"title": "God of War", "completionDate": "2024-01-20", "hours": 35, "platform": "PlayStation", "completion": 85},
+    {"title": "Baldur's Gate 3", "completionDate": "2024-03-10", "hours": 120, "platform": "Steam", "completion": 78},
 ]
 
 @app.route("/")
 def home():
     return render_template("index.html")
-
-@app.route("/gaming")
-def gaming():
-    return render_template("category.html", category="games", items=favorites_data["games"], title="Gaming")
 
 @app.route("/movies")
 def movies():
@@ -57,7 +55,7 @@ def favorite_detail(item_id):
 
 @app.route("/games")
 def games():
-    return render_template("games.html", games=games_100_percent)
+    return render_template("games.html", games=all_games)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -14,10 +14,9 @@
             </div>
             <ul class="nav-links">
                 <li><a href="/" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
-                <li><a href="/gaming" class="{% if request.endpoint == 'category' and category == 'games' %}active{% endif %}">Gaming</a></li>
                 <li><a href="/movies" class="{% if request.endpoint == 'category' and category == 'movies' %}active{% endif %}">Movies</a></li>
                 <li><a href="/food" class="{% if request.endpoint == 'category' and category == 'food' %}active{% endif %}">Food</a></li>
-                <li><a href="/games" class="{% if request.endpoint == 'games' %}active{% endif %}">100% Games</a></li>
+                <li><a href="/games" class="{% if request.endpoint == 'games' %}active{% endif %}">Games</a></li>
             </ul>
         </div>
     </nav>
