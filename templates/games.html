@@ -29,17 +29,21 @@
 
     <div class="games-list">
         {% for game in games %}
-        <div class="game-card" data-platform="{{ game.platform }}" data-completion="{{ game.completion }}">
+        <div class="game-card" data-platform="{{ game.platform }}" data-completion="{{ game.completion if game.completion is defined else 0 }}">
+            {% if game.completion is defined %}
             <div class="game-status">{{ game.completion }}%</div>
+            {% endif %}
             <div class="game-info">
                 <h3>{{ game.title }}</h3>
                 <div class="game-details">
                     <span class="game-hours"> {{ game.hours }} hours</span>
+                    {% if game.completionDate is defined %}
                     <span class="game-date"> {{ game.completionDate }}</span>
+                    {% endif %}
                     <span class="game-platform"> {{ game.platform }}</span>
                 </div>
             </div>
-            {% if game.completion == 100 %}
+            {% if game.completion is defined and game.completion == 100 %}
             <div class="game-badge">MASTERED</div>
             {% endif %}
         </div>
