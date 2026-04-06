@@ -29,9 +29,11 @@
 
     <div class="games-list">
         {% for game in games %}
-        <div class="game-card" data-platform="{{ game.platform }}" data-completion="{{ game.completion if game.completion is defined else 0 }}">
+        <div class="game-card" data-platform="{{ game.platform }}" data-completion="{{ game.completion if game.completion is defined else (game.achievements_completion if game.achievements_completion is defined else 0) }}">
             {% if game.completion is defined %}
             <div class="game-status">{{ game.completion }}%</div>
+            {% elif game.achievements_completion is defined %}
+            <div class="game-status">{{ game.achievements_completion }}%</div>
             {% endif %}
             <div class="game-info">
                 <h3>{{ game.title }}</h3>
@@ -42,8 +44,19 @@
                     {% endif %}
                     <span class="game-platform"> {{ game.platform }}</span>
                 </div>
+                {% if game.achievements_total is defined %}
+                <div class="game-achievements">
+                    <span class="achievements-info">{{ game.achievements_unlocked }}/{{ game.achievements_total }} achievements</span>
+                </div>
+                {% elif game.completion is defined %}
+                <div class="game-achievements">
+                    <span class="achievements-info">{{ game.completion }}% Complete</span>
+                </div>
+                {% endif %}
             </div>
             {% if game.completion is defined and game.completion == 100 %}
+            <div class="game-badge">MASTERED</div>
+            {% elif game.achievements_completion is defined and game.achievements_completion == 100 %}
             <div class="game-badge">MASTERED</div>
             {% endif %}
         </div>
@@ -60,8 +73,12 @@ function updateStats() {
     gameCards.forEach(card => {
         if (card.style.display !== 'none') {
             totalVisible++;
-            if (card.getAttribute('data-completion') === '100') {
-                completed100++;
+            const statusElement = card.querySelector('.game-status');
+            if (statusElement) {
+                const percentage = parseFloat(statusElement.textContent);
+                if (percentage === 100) {
+                    completed100++;
+                }
             }
         }
     });
@@ -84,7 +101,14 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
             if (filter === 'all') {
                 card.style.display = '';
             } else if (filter === '100') {
-                card.style.display = card.getAttribute('data-completion') === '100' ? '' : 'none';
+                // Check if the game-status element shows 100%
+                const statusElement = card.querySelector('.game-status');
+                let is100Percent = false;
+                if (statusElement) {
+                    const percentage = parseFloat(statusElement.textContent);
+                    is100Percent = percentage === 100;
+                }
+                card.style.display = is100Percent ? '' : 'none';
             } else {
                 card.style.display = card.getAttribute('data-platform') === filter ? '' : 'none';
             }

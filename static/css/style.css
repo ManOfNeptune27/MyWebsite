@@ -618,6 +618,27 @@ main {
     flex-shrink: 0;
 }
 
+.game-achievements {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.achievements-info {
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.achievements-percent {
+    color: var(--accent-secondary);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
 /* ============================================
    ABOUT SECTION
    ============================================ */

@@ -21,10 +21,52 @@ favorites_data = {
     ]
 }
 
+def get_game_achievements(appid):
+    """
+    Fetch achievements for a specific game
+    Returns dict with unlocked count, total count, and percentage
+    """
+    try:
+        url = f"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1"
+        params = {
+            "key": STEAM_API_KEY,
+            "steamid": STEAM_USER_ID,
+            "appid": appid,
+            "format": "json"
+        }
+        
+        response = requests.get(url, params=params, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+        
+        if "playerstats" not in data or "achievements" not in data["playerstats"]:
+            print(f"No achievements found for app {appid}")
+            return None
+        
+        achievements = data["playerstats"]["achievements"]
+        unlocked = sum(1 for ach in achievements if ach.get("achieved", 0) == 1)
+        total = len(achievements)
+        
+        if total == 0:
+            return None
+        
+        completion = round((unlocked / total) * 100, 1)
+        print(f"Found {unlocked}/{total} achievements for app {appid}")
+        
+        return {
+            "unlocked": unlocked,
+            "total": total,
+            "completion": completion
+        }
+    
+    except (requests.exceptions.RequestException, KeyError, ValueError) as e:
+        print(f"Error fetching achievements for app {appid}: {e}")
+        return None
+
 def get_steam_games():
     """
     Fetch games from Steam Web API
-    Returns a list of games with their playtime data
+    Returns a list of games with their playtime and achievement data
     """
     try:
         # Get owned games
@@ -56,12 +98,22 @@ def get_steam_games():
             
             # Only include games with playtime
             if hours > 0:
-                transformed_games.append({
+                appid = game.get("appid")
+                game_data = {
                     "title": game.get("name", "Unknown Game"),
                     "hours": hours,
                     "platform": "Steam",
-                    "appid": game.get("appid")
-                })
+                    "appid": appid
+                }
+                
+                # Fetch achievements if available
+                achievements = get_game_achievements(appid)
+                if achievements:
+                    game_data["achievements_unlocked"] = achievements["unlocked"]
+                    game_data["achievements_total"] = achievements["total"]
+                    game_data["achievements_completion"] = achievements["completion"]
+                
+                transformed_games.append(game_data)
         
         return sorted(transformed_games, key=lambda x: x["hours"], reverse=True)
     
