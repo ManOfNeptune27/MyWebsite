@@ -1,8 +1,16 @@
 // Smooth scroll behavior for better UX
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        const isHomeAnchor = href.startsWith('/#');
+
+        if (isHomeAnchor && window.location.pathname !== '/') {
+            return;
+        }
+
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetSelector = isHomeAnchor ? href.slice(1) : href;
+        const target = document.querySelector(targetSelector);
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
@@ -13,24 +21,52 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Highlight active nav link on scroll
-window.addEventListener('scroll', () => {
+function updateActiveNavLink() {
     const navLinks = document.querySelectorAll('.nav-links a');
+    const currentPath = window.location.pathname;
+    const isHomePage = currentPath === '/';
+    const scrollPosition = window.scrollY + 160;
+    let activeHash = '';
+
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === window.location.pathname) {
+    });
+
+    if (isHomePage) {
+        document.querySelectorAll('main section[id]').forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (sectionTop <= scrollPosition) {
+                activeHash = `#${section.id}`;
+            }
+        });
+
+        if (activeHash) {
+            const activeLink = document.querySelector(`.nav-links a[href="/${activeHash}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+                return;
+            }
+        }
+
+        const homeLink = document.querySelector('.nav-links a[href="/"]');
+        if (homeLink) {
+            homeLink.classList.add('active');
+        }
+        return;
+    }
+
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
             link.classList.add('active');
         }
     });
-});
+}
+
+window.addEventListener('scroll', updateActiveNavLink);
 
 // Set active nav link on page load
 document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === window.location.pathname) {
-            link.classList.add('active');
-        }
-    });
+    updateActiveNavLink();
 });
 
 // Add hover effects to favorite items

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | My Portfolio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Contact</h1>
+    <p>Ways to reach me and where to find my work</p>
+</div>
+
+<section class="content-section">
+    <div class="contact-panel card">
+        <p>I’m open to internships, collaboration, and projects that need a clean front end or a dependable Flask backend.</p>
+        {% if contact_email %}
+        <p class="contact-email">Email: <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+        {% endif %}
+        <div class="contact-links">
+            {% for link in contact_links %}
+                {% if link.url %}
+                <a href="{{ link.url }}" class="btn btn-primary">{{ link.label }}</a>
+                {% else %}
+                <span class="btn btn-secondary is-muted">{{ link.label }} soon</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

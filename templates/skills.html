@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Skills | My Portfolio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Skills</h1>
+    <p>Tools, languages, and areas I’m growing in</p>
+</div>
+
+<section class="content-section">
+    <div class="skill-grid">
+        {% for group in skill_groups %}
+        <div class="skill-card card">
+            <h3>{{ group.title }}</h3>
+            <div class="tag-list">
+                {% for item in group['items'] %}
+                <span class="tech-pill">{{ item }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Projects | My Portfolio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Projects</h1>
+    <p>Featured builds and selected work</p>
+</div>
+
+<section class="content-section">
+    <div class="project-grid">
+        {% for project in featured_projects %}
+        <article class="project-card card">
+            <div class="project-card-inner">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.summary }}</p>
+                <div class="tech-list">
+                    {% for tech in project.stack %}
+                    <span class="tech-pill">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                <div class="project-links">
+                    {% for link in project.links %}
+                    <a href="{{ link.url }}" class="btn btn-primary project-button">{{ link.label }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

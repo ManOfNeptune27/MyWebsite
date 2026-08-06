@@ -1,14 +1,37 @@
 from flask import Flask, render_template, request
 import requests
 from datetime import datetime
+import os
+from pathlib import Path
 
 app = Flask(__name__)
 
-# Steam API Configuration - UPDATE THESE WITH YOUR VALUES
-STEAM_API_KEY = "BB2F192F6601D0B7D61EE485B0B5242F"
-STEAM_USER_ID = "76561199208258488"
+def load_env_file():
+    env_path = Path(__file__).with_name(".env")
 
-# Sample data for favorites
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_env_file()
+
+# Steam API Configuration - set in .env or environment variables
+STEAM_API_KEY = os.environ.get("STEAM_API_KEY", "")
+STEAM_USER_ID = os.environ.get("STEAM_USER_ID", "")
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "")
+GITHUB_URL = os.environ.get("GITHUB_URL", "")
+LINKEDIN_URL = os.environ.get("LINKEDIN_URL", "")
+RESUME_URL = os.environ.get("RESUME_URL", "")
+
+# Sample data for featured items
 favorites_data = {
     "games": [
         {"id": 1, "name": "Elden Ring", "rating": 9.5, "category": "games", "details": "Amazing open-world action RPG with incredible boss design and a beautiful, interconnected world. The sense of exploration is unmatched."},
@@ -131,25 +154,95 @@ fallback_games = [
     {"title": "Baldur's Gate 3", "completionDate": "2024-03-10", "hours": 120, "platform": "Steam", "completion": 78},
 ]
 
+featured_projects = [
+    {
+        "title": "ASL Dictionary Website",
+        "summary": "A website built with Svelte, TypeScript, HTML, and JavaScript to help people learn ASL. It won first place at the 2024 Kent State Hackathon.",
+        "stack": ["Svelte", "TypeScript", "HTML", "JavaScript"],
+        "links": [
+            {"label": "GitHub", "url": "https://github.com/ManOfNeptune27/asl-dictionary"}
+        ]
+    },
+    {
+        "title": "ASL Department Dictionary",
+        "summary": "A school project for organizing and storing teachers' ASL vocabulary in one consolidated dictionary for day-to-day use.",
+        "stack": ["Web App", "Dictionary"],
+        "links": [
+            {"label": "GitHub", "url": "https://github.com/ManOfNeptune27/ASLDepartmentDictionary"}
+        ]
+    },
+    {
+        "title": "The Cattery",
+        "summary": "A Unity game made by Team A about creating cats by baking them from dough.",
+        "stack": ["C#"],
+        "links": [
+            {"label": "GitHub", "url": "https://github.com/knotpil/GDP-TeamA"}
+        ]
+    }
+]
+
+skill_groups = [
+    {
+        "title": "Languages",
+        "items": ["Python", "JavaScript", "HTML", "CSS"]
+    },
+    {
+        "title": "Frameworks",
+        "items": ["Flask", "Jinja2", "APIs", "Responsive UI"]
+    },
+    {
+        "title": "Interests",
+        "items": ["Game Dev", "Accessibility", "ASL", "Web Design"]
+    }
+]
+
+contact_links = [
+    {"label": "GitHub", "url": GITHUB_URL},
+    {"label": "LinkedIn", "url": LINKEDIN_URL},
+    {"label": "Resume", "url": RESUME_URL},
+]
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template(
+        "index.html",
+        featured_projects=featured_projects,
+        skill_groups=skill_groups,
+        contact_links=contact_links,
+        contact_email=CONTACT_EMAIL,
+    )
+
+
+@app.route("/projects")
+def projects():
+    return render_template(
+        "projects.html",
+        featured_projects=featured_projects,
+        title="Projects",
+    )
+
+
+@app.route("/skills")
+def skills():
+    return render_template(
+        "skills.html",
+        skill_groups=skill_groups,
+        title="Skills",
+    )
+
+
+@app.route("/contact")
+def contact():
+    return render_template(
+        "contact.html",
+        contact_links=contact_links,
+        contact_email=CONTACT_EMAIL,
+        title="Contact",
+    )
 
 @app.route("/movies")
 def movies():
     return render_template("category.html", category="movies", items=favorites_data["movies"], title="Movies")
-
-@app.route("/favorites")
-def favorites():
-    return render_template("favorites.html", favorites=favorites_data)
-
-@app.route("/favorites/<int:item_id>")
-def favorite_detail(item_id):
-    for category in favorites_data.values():
-        for item in category:
-            if item["id"] == item_id:
-                return render_template("favorite_detail.html", item=item)
-    return "Not found", 404
 
 @app.route("/games")
 def games():

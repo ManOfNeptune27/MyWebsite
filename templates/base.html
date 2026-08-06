@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Portfolio{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -14,8 +17,9 @@
             </div>
             <ul class="nav-links">
                 <li><a href="/" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
-                <li><a href="/movies" class="{% if request.endpoint == 'category' and category == 'movies' %}active{% endif %}">Movies</a></li>
-                <li><a href="/games" class="{% if request.endpoint == 'games' %}active{% endif %}">Games</a></li>
+                <li><a href="/projects" class="{% if request.endpoint == 'projects' %}active{% endif %}">Projects</a></li>
+                <li><a href="/skills" class="{% if request.endpoint == 'skills' %}active{% endif %}">Skills</a></li>
+                <li><a href="/contact" class="{% if request.endpoint == 'contact' %}active{% endif %}">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -25,10 +29,9 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Conner Bunner. Built with Flask & Pure Grit</p>
+        <p>&copy; 2026 Conner Brunner // Built with Flask &amp; Pure Grit</p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-</html>
 </html>
