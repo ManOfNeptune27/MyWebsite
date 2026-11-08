@@ -1,6 +1,7 @@
 export interface SiteLink {
   label: string;
   url: string;
+  download?: string;
 }
 
 export interface SiteConfig {
@@ -9,10 +10,10 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  contactEmail: '', // TODO: Add a public contact email address.
+  contactEmail: 'connerbrunner@gmail.com',
   contactLinks: [
-    { label: 'GitHub', url: '' }, // TODO: Add the GitHub profile URL.
-    { label: 'LinkedIn', url: '' }, // TODO: Add the LinkedIn profile URL.
-    { label: 'Resume', url: '' } // TODO: Add a public resume URL.
+    { label: 'GitHub', url: 'https://github.com/ManOfNeptune27' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/conner-brunner/' },
+    { label: 'Resume', url: '/resume.docx', download: 'ConnerBrunner.docx' }
   ]
 };

@@ -2,9 +2,12 @@
   import PageHeader from '#lib/components/PageHeader.svelte';
 
   const skillGroups = [
-    { title: 'Languages', items: ['Python', 'JavaScript', 'HTML', 'CSS'] },
-    { title: 'Frameworks', items: ['Flask', 'Jinja2', 'APIs', 'Responsive UI'] },
-    { title: 'Interests', items: ['Game Dev', 'Accessibility', 'ASL', 'Web Design'] }
+    { title: 'Programming Languages', items: ['C++', 'C#', 'Python', 'Java', 'JavaScript', 'TypeScript', 'SQL'] },
+    { title: 'Web Development', items: ['SvelteKit', 'Svelte', 'Bootstrap', 'HTML', 'CSS'] },
+    { title: 'Data & Storage', items: ['MySQL', 'Turso (libSQL)', 'Cloudflare R2'] },
+    { title: 'Development Tools', items: ['Git', 'SVN', 'Linux', 'Bash', 'Visual Studio Code', 'Qt Creator'] },
+    { title: 'Security & CTF', items: ['Python cryptography scripts', 'zsteg', 'gobuster'] },
+    { title: 'Platforms', items: ['Unity', 'Vercel'] }
   ];
 </script>
 
@@ -12,7 +15,7 @@
   <title>Skills | My Portfolio</title>
 </svelte:head>
 
-<PageHeader title="Skills" description="Tools, languages, and areas I’m growing in" />
+<PageHeader title="Skills" description="Technical skills demonstrated across my projects, research, and CTF competitions" />
 
 <section class="content-section">
   <div class="skill-grid">

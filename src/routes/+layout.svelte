@@ -69,7 +69,7 @@
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
           );
 
-    document.querySelectorAll<HTMLElement>('.favorites-section, .card').forEach((element) => {
+    document.querySelectorAll<HTMLElement>('.favorites-section, .card:not(.contact-panel)').forEach((element) => {
       element.style.animation = 'fadeIn 0.5s ease forwards';
       element.style.animationPlayState = 'paused';
       observer?.observe(element);

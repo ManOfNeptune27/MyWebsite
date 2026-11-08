@@ -17,7 +17,7 @@ npm run fetch:steam
 
 The script writes the result to `src/lib/data/games.json`. The existing hardcoded game list is used if that snapshot file is absent.
 
-Update the public email, GitHub, LinkedIn, and resume URLs in `src/lib/data/site.ts`; these are intentionally left as TODOs.
+The public email, GitHub, and LinkedIn links are configured in `src/lib/data/site.ts`. The Contact page links to the downloadable resume at `static/resume.docx`.
 
 ## Build
 

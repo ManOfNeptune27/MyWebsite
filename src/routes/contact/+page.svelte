@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import PageHeader from '#lib/components/PageHeader.svelte';
   import { site } from '#lib/data/site';
 </script>
@@ -20,7 +21,11 @@
     <div class="contact-links">
       {#each site.contactLinks as link}
         {#if link.url}
-          <a href={link.url} class="btn btn-primary">{link.label}</a>
+          <a
+            href={link.download ? `${resolve('/')}${link.url.slice(1)}` : link.url}
+            class="btn btn-primary"
+            download={link.download || undefined}
+          >{link.label}</a>
         {:else}
           <span class="btn btn-secondary is-muted">{link.label} soon</span>
         {/if}
