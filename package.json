@@ -1,0 +1,28 @@
+{
+  "name": "conner-brunner-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "imports": {
+    "#lib": "./src/lib",
+    "#lib/*": "./src/lib/*"
+  },
+  "scripts": {
+    "prepare": "svelte-kit sync",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "fetch:steam": "node scripts/fetch-steam.mjs"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^4.0.1",
+    "@sveltejs/kit": "^3.1.1",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@types/node": "^24.10.0",
+    "svelte": "^5.57.3",
+    "svelte-check": "^4.7.8",
+    "typescript": "^6.0.0",
+    "vite": "^8.3.6"
+  }
+}

@@ -2,8 +2,6 @@
    GAME BOY PORTFOLIO — THEME
    Press Start 2P + Courier New
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 :root {
     --gb-black:      #ffffff;  /* page background */
     --gb-screen:     #ffffff;  /* card/section background */
@@ -15,6 +13,9 @@
     --gb-olive:      #555555;  /* muted secondary text */
     --gb-border:     #e2e2e2;
     --gb-text:       #111111; /* primary body/heading text */
+    --gb-white:      #ffffff;
+    --gb-nav-muted:  rgba(255,255,255,0.75);
+    --gb-neutral-shadow: rgba(0,0,0,0.1);
     --gb-shadow:     rgba(255, 122, 26, 0.18);
     --gb-glow:       rgba(255, 122, 26, 0.08);
 }
@@ -46,13 +47,13 @@ main {
 }
 
 a {
-    color: var(--gb-phosphor);
+    color: var(--gb-dim);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
-    color: var(--gb-bright);
+    color: var(--gb-phosphor);
 }
 
 /* ============================================
@@ -80,7 +81,7 @@ a:hover {
 .navbar {
     background-color: var(--gb-phosphor);
     border-bottom: 3px solid var(--gb-bright);
-    box-shadow: 0 4px 0 var(--gb-bright), 0 6px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 0 var(--gb-bright), 0 6px 16px var(--gb-neutral-shadow);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -98,7 +99,7 @@ a:hover {
 .logo a {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.85rem;
-    color: #ffffff;
+    color: var(--gb-white);
     text-decoration: none;
     letter-spacing: 0.05em;
 }
@@ -116,7 +117,7 @@ a:hover {
 .nav-links a {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.55rem;
-    color: rgba(255,255,255,0.75);
+    color: var(--gb-nav-muted);
     text-decoration: none;
     letter-spacing: 0.1em;
     transition: color 0.2s;
@@ -126,7 +127,7 @@ a:hover {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #ffffff;
+    color: var(--gb-white);
 }
 
 .nav-links a.active::after {
@@ -136,7 +137,7 @@ a:hover {
     left: 0;
     right: 0;
     height: 3px;
-    background: #ffffff;
+    background: var(--gb-white);
 }
 
 /* ============================================
@@ -397,6 +398,11 @@ a:hover {
 
 .contact-email a {
     border-bottom: 1px solid var(--gb-phosphor);
+}
+
+.todo-note {
+    font-size: 0.75rem;
+    color: var(--gb-olive);
 }
 
 .section-title + .project-grid,
