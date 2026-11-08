@@ -16,6 +16,7 @@
     --gb-white:      #ffffff;
     --gb-nav-muted:  rgba(255,255,255,0.75);
     --gb-neutral-shadow: rgba(0,0,0,0.1);
+    --gb-scanline:   rgba(0,0,0,0.035);
     --gb-shadow:     rgba(255, 122, 26, 0.18);
     --gb-glow:       rgba(255, 122, 26, 0.08);
 }
@@ -40,6 +41,21 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        var(--gb-scanline) 3px,
+        var(--gb-scanline) 4px
+    );
 }
 
 main {
