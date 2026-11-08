@@ -332,6 +332,10 @@ a:hover {
     transition: border-color 0.2s, color 0.2s;
 }
 
+.about-content a.asl-hackathon-link {
+    filter: none;
+}
+
 .about-content a:hover {
     color: var(--gb-phosphor);
     border-color: var(--gb-phosphor);
@@ -1065,6 +1069,11 @@ a:hover {
 @media (max-width: 480px) {
     .logo a { font-size: 0.65rem; }
     .nav-links a { font-size: 0.45rem; }
+    .contact-email {
+        font-size: clamp(0.4rem, 2vw, 0.52rem);
+        letter-spacing: 0.03em;
+        overflow-wrap: anywhere;
+    }
 }
 
 /* ============================================

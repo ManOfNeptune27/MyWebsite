@@ -31,6 +31,6 @@
     <p>I graduated from Kent State University with a Bachelor of Science in Computer Science in May 2026, with a minor in American Sign Language. I’m currently pursuing a master’s degree in Computer Science.</p>
     <p>I enjoy building practical software, from a full-stack ASL dictionary for teachers to tools that explore software dependencies. I also write Python scripts for cryptography challenges and collaborate on eye-tracking research.</p>
     <p>As a HacKSU organizer and lesson coordinator and an academic tutor, I help plan technical learning events and explain computer science concepts to others.</p>
-    <p>Explore my <a href="https://devpost.com/software/asl-translator-6shtz4">ASL hackathon project</a> and selected work, or contact me about junior developer, solutions engineer, and internship opportunities.</p>
+    <p>Explore my <a class="asl-hackathon-link" href="https://devpost.com/software/asl-translator-6shtz4">ASL hackathon project</a> and selected work, or contact me about junior developer, solutions engineer, and internship opportunities.</p>
   </div>
 </section>
