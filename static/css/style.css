@@ -3,22 +3,41 @@
    Press Start 2P + Courier New
    ============================================ */
 :root {
-    --gb-black:      #000000;  /* page background */
-    --gb-screen:     #0d0d0d;  /* card/section background */
-    --gb-dark:       #171717;  /* subtle alt surface */
-    --gb-mid:        #3a3a3a;  /* borders/dividers */
-    --gb-phosphor:   #FF7A1A;  /* primary accent: orange */
-    --gb-bright:     #FF9447;  /* lighter orange (hover/highlight) */
-    --gb-dim:        #4A90E2;  /* secondary accent: light blue (links only) */
-    --gb-olive:      #c4c4c4;  /* muted secondary text */
-    --gb-border:     #3a3a3a;
-    --gb-text:       #ffffff; /* primary body/heading text */
-    --gb-white:      #ffffff;
-    --gb-nav-muted:  rgba(255,255,255,0.75);
-    --gb-neutral-shadow: rgba(0,0,0,0.45);
-    --gb-scanline:   rgba(0,0,0,0.32);
-    --gb-shadow:     rgba(255, 122, 26, 0.18);
-    --gb-glow:       rgba(255, 122, 26, 0.08);
+    --gb-black:      #050b07;  /* terminal background */
+    --gb-screen:     #0b170f;  /* card/section background */
+    --gb-dark:       #122019;  /* subtle alt surface */
+    --gb-mid:        #1f3b2e;  /* borders/dividers */
+    --gb-phosphor:   #7ef6a6;  /* primary accent: terminal green */
+    --gb-bright:     #baf8ce;  /* lighter green */
+    --gb-dim:        #4A90E2;  /* links */
+    --gb-olive:      #a8d7b8;  /* muted secondary text */
+    --gb-border:     #1f3b2e;
+    --gb-text:       #dfffe9; /* primary body/heading text */
+    --gb-white:      #e9fff3;
+    --gb-nav-muted:  rgba(184, 255, 209, 0.82);
+    --gb-neutral-shadow: rgba(0,0,0,0.5);
+    --gb-scanline:   rgba(126, 246, 166, 0.07);
+    --gb-shadow:     rgba(126, 246, 166, 0.18);
+    --gb-glow:       rgba(126, 246, 166, 0.12);
+    /* Alternative orange palette for reference:
+       --gb-black: #000000;
+       --gb-screen: #0d0d0d;
+       --gb-dark: #171717;
+       --gb-mid: #3a3a3a;
+       --gb-phosphor: #FF7A1A;
+       --gb-bright: #FF9447;
+       --gb-dim: #4A90E2;
+       --gb-olive: #c4c4c4;
+       --gb-border: #3a3a3a;
+       --gb-text: #ffffff;
+       --gb-white: #ffffff;
+       --gb-nav-muted: rgba(255,255,255,0.75);
+       --gb-neutral-shadow: rgba(0,0,0,0.45);
+       --gb-scanline: rgba(0,0,0,0.32);
+       --gb-shadow: rgba(255, 122, 26, 0.18);
+       --gb-glow: rgba(255, 122, 26, 0.08);
+    */
+    --terminal-font: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", monospace;
 }
 
 /* ============================================
@@ -31,15 +50,39 @@
 }
 
 html, body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--terminal-font);
     background-color: var(--gb-black);
     color: var(--gb-text);
     line-height: 1.7;
     min-height: 100vh;
 }
 
+body,
+body :is(h1, h2, h3, h4, h5, h6, p, a, span, li, strong, button, .stat-number, .stat-label, .game-status, .game-badge, .game-hours, .game-date, .game-platform, .rating-value, .achievements-info, .contact-email, .todo-note),
+.logo a,
+.nav-links a,
+.hero-content h1,
+.hero-kicker,
+.hero-subtitle,
+.page-header h1,
+.page-header p,
+.card-title,
+.section-title,
+.meta-item,
+.timeline-item,
+.game-card,
+.project-card,
+.skill-card,
+.contact-card,
+.contact-item,
+.about-content h2,
+.project-card h3,
+.contact-email {
+    font-family: var(--terminal-font) !important;
+}
+
 body :is(h1, h2, h3, p, a, span, li, strong, button, .stat-number, .stat-label, .game-status, .game-badge, .game-hours, .game-date, .game-platform, .rating-value, .achievements-info, .contact-email, .todo-note) {
-    filter: drop-shadow(0 0 2px currentColor);
+    filter: drop-shadow(0 0 0.5px currentColor);
 }
 
 body {
@@ -70,12 +113,12 @@ a {
     color: var(--gb-dim);
     text-decoration: none;
     transition: color 0.2s;
-    filter: drop-shadow(0 0 3px currentColor);
+    filter: drop-shadow(0 0 0.75px currentColor);
 }
 
 a:hover {
     color: var(--gb-phosphor);
-    filter: drop-shadow(0 0 4px currentColor);
+    filter: drop-shadow(0 0 1px currentColor);
 }
 
 /* ============================================
@@ -234,17 +277,27 @@ a:hover {
 }
 
 .achievement-highlights {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.75rem 2rem;
     max-width: 860px;
     margin: 2rem auto 0;
-    padding: 1rem 1.25rem;
+    padding: 1.75rem 1.5rem;
     border-top: 1px solid var(--gb-mid);
     border-bottom: 1px solid var(--gb-mid);
     color: var(--gb-olive);
-    font-size: 0.82rem;
+    font-size: 1rem;
+}
+
+.achievement-highlights h2 {
+    margin-bottom: 1.25rem;
+    color: var(--gb-phosphor);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.achievement-list {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    text-align: center;
 }
 
 .achievement-highlights strong {
@@ -252,7 +305,7 @@ a:hover {
 }
 
 .achievement-highlights p {
-    filter: drop-shadow(0 0 2px var(--gb-phosphor));
+    filter: drop-shadow(0 0 1px currentColor);
 }
 
 /* ============================================
@@ -1047,8 +1100,10 @@ a:hover {
     .main-container { padding: 2rem 1.2rem; }
 
     .achievement-highlights {
-        flex-direction: column;
-        align-items: center;
+        text-align: center;
+    }
+
+    .achievement-list {
         text-align: center;
     }
 
