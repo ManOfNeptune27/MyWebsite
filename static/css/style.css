@@ -3,40 +3,40 @@
    Press Start 2P + Courier New
    ============================================ */
 :root {
-    --gb-black:      #050b07;  /* terminal background */
-    --gb-screen:     #0b170f;  /* card/section background */
-    --gb-dark:       #122019;  /* subtle alt surface */
-    --gb-mid:        #1f3b2e;  /* borders/dividers */
-    --gb-phosphor:   #7ef6a6;  /* primary accent: terminal green */
-    --gb-bright:     #baf8ce;  /* lighter green */
-    --gb-dim:        #4A90E2;  /* links */
-    --gb-olive:      #a8d7b8;  /* muted secondary text */
+    /*
+    --gb-black:      #050b07;
+    --gb-screen:     #0b170f;
+    --gb-dark:       #122019;
+    --gb-mid:        #1f3b2e;
+    --gb-phosphor:   #7ef6a6;
+    --gb-bright:     #baf8ce;
+    --gb-dim:        #4A90E2;
+    --gb-olive:      #a8d7b8;
     --gb-border:     #1f3b2e;
-    --gb-text:       #dfffe9; /* primary body/heading text */
+    --gb-text:       #dfffe9;
     --gb-white:      #e9fff3;
     --gb-nav-muted:  rgba(184, 255, 209, 0.82);
     --gb-neutral-shadow: rgba(0,0,0,0.5);
     --gb-scanline:   rgba(126, 246, 166, 0.07);
     --gb-shadow:     rgba(126, 246, 166, 0.18);
     --gb-glow:       rgba(126, 246, 166, 0.12);
-    /* Alternative orange palette for reference:
-       --gb-black: #000000;
-       --gb-screen: #0d0d0d;
-       --gb-dark: #171717;
-       --gb-mid: #3a3a3a;
-       --gb-phosphor: #FF7A1A;
-       --gb-bright: #FF9447;
-       --gb-dim: #4A90E2;
-       --gb-olive: #c4c4c4;
-       --gb-border: #3a3a3a;
-       --gb-text: #ffffff;
-       --gb-white: #ffffff;
-       --gb-nav-muted: rgba(255,255,255,0.75);
-       --gb-neutral-shadow: rgba(0,0,0,0.45);
-       --gb-scanline: rgba(0,0,0,0.32);
-       --gb-shadow: rgba(255, 122, 26, 0.18);
-       --gb-glow: rgba(255, 122, 26, 0.08);
     */
+    --gb-black:      #000000;
+    --gb-screen:     #0d0d0d;
+    --gb-dark:       #171717;
+    --gb-mid:        #3a3a3a;
+    --gb-phosphor:   #ffb347;
+    --gb-bright:     #ffd08a;
+    --gb-dim:        #4A90E2;
+    --gb-olive:      #c4c4c4;
+    --gb-border:     #3a3a3a;
+    --gb-text:       #ffffff;
+    --gb-white:      #ffffff;
+    --gb-nav-muted:  rgba(255,255,255,0.75);
+    --gb-neutral-shadow: rgba(0,0,0,0.45);
+    --gb-scanline:   rgba(0,0,0,0.32);
+    --gb-shadow:     rgba(255, 179, 71, 0.18);
+    --gb-glow:       rgba(255, 179, 71, 0.08);
     --terminal-font: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", monospace;
 }
 
@@ -431,13 +431,15 @@ a:hover {
 .project-card h3,
 .skill-card h3 {
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.65rem;
     line-height: 1.7;
     color: var(--gb-bright);
     margin-bottom: 1rem;
     text-align: left;
     width: 100%;
 }
+
+.project-card.card h3 { font-size: 0.9rem; }
+.skill-card h3 { font-size: 0.65rem; }
 
 .project-card p,
 .contact-panel p {
